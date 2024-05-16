@@ -11,13 +11,14 @@
     <main>
       <div class="dropdown">
           <select id="mode">
-            <option value="1" selected="selected">Single Game</option>
-<!--             <option value="2" >Tournament</option> -->
+            <option value="1" >Single Game</option>
+            <option value="2" selected="selected">Tournament</option>
             <option value="3">Turn by Turn</option>
           </select>
         <button id="go" onclick="buttonClick()">Go</button>
         <button id="reset" onclick="resetClick()">Reset</button>
-      </div>
+        <div></div>
+        <input type="number" id="tourSize" name="tournament size" min="10" max="100" />      </div>
     </main>
     <script src="sketch.js"></script>
     <script src="player.js"></script>
