@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.2/p5.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.2/addons/p5.sound.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    
+
     <link rel="stylesheet" type="text/css" href="style.css">
     <meta charset="utf-8" />
-
   </head>
   <body>
     <main>
+      
       <div class="dropdown">
           <select id="mode">
             <option value="1" >Single Game</option>
@@ -19,8 +23,33 @@
         <button id="reset" onclick="resetClick()">Reset</button>
         <div></div>
         <input type="number" id="tourSize" name="tournament size" min="10" max="100" />      </div>
+      <label>Player 1</label>
+      <div class="dropdown">
+          <select id="bot1">
+            <option value="1" selected="selected">rando</option>
+            <option value="2" >WilliamBot</option>
+            <option value="3">Turn by Turn</option>
+          </select>
+      </div>
+      <label>Player 2</label>
+      <div class="dropdown">
+          <select id="bot2">
+            <option value="1" selected="selected">rando</option>
+            <option value="2" >WilliamBot</option>
+<!--             <option value="3">Turn by Turn</option> -->
+          </select>
+      </div>
     </main>
+        <script src="player.js"></script>
+
+            <script src="https://cdn.jsdelivr.net/gh/SNEAKY9000/Something/The_First_Something.js"></script>
+
     <script src="sketch.js"></script>
-    <script src="player.js"></script>
+    <script src="player1.js"></script>
+    <script src="player2.js"></script>
+
+<!--     test -->
+
+    <script src="https://cdn.jsdelivr.net/gh/MacAbrams/mancala/test.js"></script>
   </body>
 </html>
