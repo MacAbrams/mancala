@@ -10,6 +10,8 @@ function setup() {
   b = new Board(p1,p2);
   background(220);
   b.draw();
+    noLoop()
+
 
 }
 function resetClick(){
@@ -18,27 +20,109 @@ function resetClick(){
 function buttonClick(){
       let a = document.getElementById("mode").value;
   if(a==1){
+    loop()
     if(b.isOver()){
       b.reset()
     }
     b.playGame();
   }
   else if(a==3 && !b.isOver()){
+    loop()
     b.playTurn();
   }
-  // else{
-  //   tournament();
-  // }
+  else{
+    noLoop()
+    tournament();
+  }
 
 }
-// function tournament(){
-//   let num = 10;
-//   let outcomes = []
-//   for(let i=0;i<num;i++){
-    
-//   }
+function tournament(){
+  let num = 10;
+  let n = document.getElementById("tourSize").value;
+  console.log(n)
+  if(n>0 && n<=1000){
+    num = n;
+  }
+  let outcome = [0,0,0,0]
+  
+  for(let i=0;i<num;i++){
+    b.reset()
+    let o = b.playGame();
+    if(o==p1.getName()){
+      outcome[0]++
+    }
+    else if(o==p2.getName()){
+      outcome[1]++;
+    }
+  }
+  
+  b.switch();
+  for(let i=0;i<num;i++){
+    b.reset()
+    let o = b.playGame();
+    if(o==p1.getName()){
+      outcome[2]++
+    }
+    else if(o==p2.getName()){
+      outcome[3]++;
+    }
+  }
+  background(220)
+  b.draw()
+  // console.log(outcome)
+  let prop1=outcome[0]/num
+  let prop2=outcome[1]/num
+  noStroke()
+  fill(255)
+  rect(80,200,200,20)
+  fill(255,0,0)
+  rect(280-200*(prop2),200,200*(prop2),20)
+  fill(0,255,0)
+  rect(80,200,200*prop1,20)
+  stroke(2)
+  fill(0)
+  // text("as Player1",150,210)
+  text(p1.getName(),20,215)
+  text(outcome[0],80,240)
+  text(outcome[1],260,240)
+  text(num-(outcome[0]+outcome[1]),80+200*(prop1),240)
+  noStroke()
+  prop1=outcome[2]/num
+  prop2=outcome[3]/num  
+  fill(255)
+  rect(80,250,200,20)
+  fill(255,0,0)
+  rect(280-200*(prop2),250,200*(prop2),20)
+  fill(0,255,0)
+  rect(80,250,200*prop1,20)
+  stroke(2)
+  fill(0)
+  // text("as Player1",150,260)
+  text(p2.getName(),20,265)
+  text(outcome[2],80,290)
+  text(outcome[3],260,290)
+  text(num-(outcome[2]+outcome[3]),80+200*(prop1),290)
+  
+    noStroke()
+  prop1=(outcome[2]+outcome[0])/num/2
+  prop2=(outcome[1]+outcome[3])/num/2
+  fill(255)
+  rect(80,320,200,20)
+  fill(255,0,0)
+  rect(280-200*(prop2),320,200*(prop2),20)
+  fill(0,255,0)
+  rect(80,320,200*prop1,20)
+  stroke(2)
+  fill(0)
+  text("combined",150,310)
+  text(p1.getName(),20,330)
+  text(p2.getName(),290,330)
+  text(outcome[0]+outcome[2],80,360)
+  text(outcome[1]+outcome[3],260,360)
+  text(2*num-(outcome[1]+outcome[2]+outcome[3]+outcome[0]),80+200*(prop1),360)
 
-// }
+  fill(255)
+}
 
 
 function draw() {
@@ -204,19 +288,33 @@ class Board{
     return false
   }
   draw(){
+    fill(255)
+    stroke(0)
+    textSize(15)
+    strokeWeight(1)
     background(200)
     ellipse(70,125,25,100)
+        fill(0)
+
     text(this.s2,70,125)
 
     for(let i=0;i<6;i++){
+      fill(255)
       ellipse(i*30+100,100,25,45)
+      fill(0)
       text(this.spaces[11-i],i*30+100,100)
     }
+          fill(255)
+
     ellipse(280,125,25,100)
+    fill(0)
     text(this.s1,280,125)
 
     for(let i=0;i<6;i++){
+            fill(255)
+
       ellipse(i*30+100,150,25,45)
+      fill(0)
       text(this.spaces[i],i*30+100,150)
 
     }
