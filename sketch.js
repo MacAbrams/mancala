@@ -4,7 +4,7 @@ let p2;
 
 function selectPlayer1(){
   let a = document.getElementById("bot1").value;
-  p1 = new Player1("test1");
+  p1 = new Player("test1");
   if(a==2){
     p1 = new Something_Else("will");
   }
@@ -12,7 +12,7 @@ function selectPlayer1(){
 function selectPlayer2(){
   let a = document.getElementById("bot2").value;
 
-  p2 = new Player1("test2");
+  p2 = new Player("test2");
   if(a==2){
     p2 = new Something_Else("will");
   }
