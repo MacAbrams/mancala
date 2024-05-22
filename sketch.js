@@ -2,10 +2,29 @@ let b;
 let p1;
 let p2;
 
+function selectPlayer1(){
+  let a = document.getElementById("bot1").value;
+  p1 = new Player1("test1");
+  if(a==2){
+    p1 = new Something_Else("will");
+  }
+}
+function selectPlayer2(){
+  let a = document.getElementById("bot2").value;
+
+  p2 = new Player1("test2");
+  if(a==2){
+    p2 = new Something_Else("will");
+  }
+}
+
 function setup() {
+  
+  
+
   createCanvas(400, 400);
-  p1 = new Player("test1")
-  p2 = new Player("test2")
+  selectPlayer1()
+  selectPlayer2()
   
   b = new Board(p1,p2);
   background(220);
