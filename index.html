@@ -24,15 +24,15 @@
         <div></div>
         <input type="number" id="tourSize" name="tournament size" min="10" max="100" />      </div>
       <label>Player 1</label>
-      <div class="dropdown">
+      <div class="dropdown" onchange="selectPlayer1()">
           <select id="bot1">
             <option value="1" selected="selected">rando</option>
             <option value="2" >WilliamBot</option>
-            <option value="3">Turn by Turn</option>
+<!--             <option value="3">Turn by Turn</option> -->
           </select>
       </div>
       <label>Player 2</label>
-      <div class="dropdown">
+      <div class="dropdown" onchange="selectPlayer2()">
           <select id="bot2">
             <option value="1" selected="selected">rando</option>
             <option value="2" >WilliamBot</option>
