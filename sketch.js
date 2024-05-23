@@ -1,177 +1,3 @@
-let b;
-let p1;
-let p2;
-
-function selectPlayer1(){
-  let a = document.getElementById("bot1").value;
-  p1 = new Player("test1");
-  if(a==2){
-    p1 = new Something_Else("will");
-  }
-}
-function selectPlayer2(){
-  let a = document.getElementById("bot2").value;
-
-  p2 = new Player("test2");
-  if(a==2){
-    p2 = new Something_Else("will");
-  }
-}
-
-function setup() {
-  
-  
-
-  createCanvas(400, 400);
-  selectPlayer1()
-  selectPlayer2()
-  
-  b = new Board(p1,p2);
-  background(220);
-  b.draw();
-    noLoop()
-
-
-}
-function resetClick(){
-  b.reset()
-}
-function buttonClick(){
-      let a = document.getElementById("mode").value;
-  if(a==1){
-    loop()
-    if(b.isOver()){
-      b.reset()
-    }
-    b.playGame();
-  }
-  else if(a==3 && !b.isOver()){
-    loop()
-    b.playTurn();
-  }
-  else{
-    noLoop()
-    tournament();
-  }
-
-}
-function tournament(){
-  let num = 10;
-  let n = document.getElementById("tourSize").value;
-  console.log(n)
-  if(n>0 && n<=1000){
-    num = n;
-  }
-  let outcome = [0,0,0,0]
-  
-  for(let i=0;i<num;i++){
-    b.reset()
-    let o = b.playGame();
-    if(o==p1.getName()){
-      outcome[0]++
-    }
-    else if(o==p2.getName()){
-      outcome[1]++;
-    }
-  }
-  
-  b.switch();
-  for(let i=0;i<num;i++){
-    b.reset()
-    let o = b.playGame();
-    if(o==p1.getName()){
-      outcome[2]++
-    }
-    else if(o==p2.getName()){
-      outcome[3]++;
-    }
-  }
-  background(220)
-  b.draw()
-  // console.log(outcome)
-  let prop1=outcome[0]/num
-  let prop2=outcome[1]/num
-  noStroke()
-  fill(255)
-  rect(80,200,200,20)
-  fill(255,0,0)
-  rect(280-200*(prop2),200,200*(prop2),20)
-  fill(0,255,0)
-  rect(80,200,200*prop1,20)
-  stroke(2)
-  fill(0)
-  // text("as Player1",150,210)
-  text(p1.getName(),20,215)
-  text(outcome[0],80,240)
-  text(outcome[1],260,240)
-  text(num-(outcome[0]+outcome[1]),80+200*(prop1),240)
-  noStroke()
-  prop1=outcome[2]/num
-  prop2=outcome[3]/num  
-  fill(255)
-  rect(80,250,200,20)
-  fill(255,0,0)
-  rect(280-200*(prop2),250,200*(prop2),20)
-  fill(0,255,0)
-  rect(80,250,200*prop1,20)
-  stroke(2)
-  fill(0)
-  // text("as Player1",150,260)
-  text(p2.getName(),20,265)
-  text(outcome[2],80,290)
-  text(outcome[3],260,290)
-  text(num-(outcome[2]+outcome[3]),80+200*(prop1),290)
-  
-    noStroke()
-  prop1=(outcome[2]+outcome[0])/num/2
-  prop2=(outcome[1]+outcome[3])/num/2
-  fill(255)
-  rect(80,320,200,20)
-  fill(255,0,0)
-  rect(280-200*(prop2),320,200*(prop2),20)
-  fill(0,255,0)
-  rect(80,320,200*prop1,20)
-  stroke(2)
-  fill(0)
-  text("combined",150,310)
-  text(p1.getName(),20,330)
-  text(p2.getName(),290,330)
-  text(outcome[0]+outcome[2],80,360)
-  text(outcome[1]+outcome[3],260,360)
-  text(2*num-(outcome[1]+outcome[2]+outcome[3]+outcome[0]),80+200*(prop1),360)
-
-  fill(255)
-}
-
-
-function draw() {
-  
-  b.draw()
-  
-  if(b.isOver()){
-    textSize(25)
-
-    let outcome = b.getWinner()
-    if(outcome != "tie"){
-      outcome = "Winner: "+outcome;
-    }
-    text(outcome,100,300)
-      textSize(14)
-
-  }
-}
-
-/*  
-                      ||  Player 2
-                      \/       
-           +====================================+
-           |    | 11 | 10 | 9  | 8 | 7 | 6 |    |
-           | S2 |==========================| S1 |
-           |    | 0  | 1  | 2  | 3 | 4 | 5 |    |
-           +====================================+
-                         e   /\
-                      Player 1  ||
-*/
 class Board{
   constructor(p1,p2){
     this.s1 = 0;
@@ -189,6 +15,12 @@ class Board{
     this.p2.setPlayer1(false);
     this.turnNumber = 0;
     this.retries = 0;
+  }
+  setP1(p1){
+    this.p1 = p1;
+  }
+  setP2(p2){
+    this.p2 = p2;
   }
   switch(){
     let temp = this.p1;
@@ -339,3 +171,181 @@ class Board{
     }
   }
 }
+
+let b;
+let p1;
+let p2;
+  b = new Board(new Player("rando 1"),new Player("rando 2"));
+
+function selectPlayer1(){
+  let a = document.getElementById("bot1").value;
+  p1 = new Player("test1");
+  if(a==2){
+    p1 = new Something_Else("will");
+  }
+  b.setP1(p1);
+}
+function selectPlayer2(){
+  let a = document.getElementById("bot2").value;
+
+  p2 = new Player("test2");
+  if(a==2){
+    p2 = new Something_Else("will");
+  }
+  b.setP2(p2);
+
+}
+
+function setup() {
+  
+  
+
+  createCanvas(400, 400);
+  selectPlayer1()
+  selectPlayer2()
+  
+  background(220);
+  b.draw();
+    noLoop()
+
+
+}
+function resetClick(){
+  b.reset()
+}
+function buttonClick(){
+      let a = document.getElementById("mode").value;
+  if(a==1){
+    loop()
+    if(b.isOver()){
+      b.reset()
+    }
+    b.playGame();
+  }
+  else if(a==3 && !b.isOver()){
+    loop()
+    b.playTurn();
+  }
+  else{
+    noLoop()
+    tournament();
+  }
+
+}
+function tournament(){
+  let num = 10;
+  let n = document.getElementById("tourSize").value;
+  console.log(n)
+  if(n>0 && n<=1000){
+    num = n;
+  }
+  let outcome = [0,0,0,0]
+  
+  for(let i=0;i<num;i++){
+    b.reset()
+    let o = b.playGame();
+    if(o==p1.getName()){
+      outcome[0]++
+    }
+    else if(o==p2.getName()){
+      outcome[1]++;
+    }
+  }
+  
+  b.switch();
+  for(let i=0;i<num;i++){
+    b.reset()
+    let o = b.playGame();
+    if(o==p1.getName()){
+      outcome[2]++
+    }
+    else if(o==p2.getName()){
+      outcome[3]++;
+    }
+  }
+  background(220)
+  b.draw()
+  // console.log(outcome)
+  let prop1=outcome[0]/num
+  let prop2=outcome[1]/num
+  noStroke()
+  fill(255)
+  rect(80,200,200,20)
+  fill(255,0,0)
+  rect(280-200*(prop2),200,200*(prop2),20)
+  fill(0,255,0)
+  rect(80,200,200*prop1,20)
+  stroke(2)
+  fill(0)
+  // text("as Player1",150,210)
+  text(p1.getName(),20,215)
+  text(outcome[0],80,240)
+  text(outcome[1],260,240)
+  text(num-(outcome[0]+outcome[1]),80+200*(prop1),240)
+  noStroke()
+  prop1=outcome[2]/num
+  prop2=outcome[3]/num  
+  fill(255)
+  rect(80,250,200,20)
+  fill(255,0,0)
+  rect(280-200*(prop2),250,200*(prop2),20)
+  fill(0,255,0)
+  rect(80,250,200*prop1,20)
+  stroke(2)
+  fill(0)
+  // text("as Player1",150,260)
+  text(p2.getName(),20,265)
+  text(outcome[2],80,290)
+  text(outcome[3],260,290)
+  text(num-(outcome[2]+outcome[3]),80+200*(prop1),290)
+  
+    noStroke()
+  prop1=(outcome[2]+outcome[0])/num/2
+  prop2=(outcome[1]+outcome[3])/num/2
+  fill(255)
+  rect(80,320,200,20)
+  fill(255,0,0)
+  rect(280-200*(prop2),320,200*(prop2),20)
+  fill(0,255,0)
+  rect(80,320,200*prop1,20)
+  stroke(2)
+  fill(0)
+  text("combined",150,310)
+  text(p1.getName(),20,330)
+  text(p2.getName(),290,330)
+  text(outcome[0]+outcome[2],80,360)
+  text(outcome[1]+outcome[3],260,360)
+  text(2*num-(outcome[1]+outcome[2]+outcome[3]+outcome[0]),80+200*(prop1),360)
+
+  fill(255)
+}
+
+
+function draw() {
+  
+  b.draw()
+  
+  if(b.isOver()){
+    textSize(25)
+
+    let outcome = b.getWinner()
+    if(outcome != "tie"){
+      outcome = "Winner: "+outcome;
+    }
+    text(outcome,100,300)
+      textSize(14)
+
+  }
+}
+
+/*  
+                      ||  Player 2
+                      \/       
+           +====================================+
+           |    | 11 | 10 | 9  | 8 | 7 | 6 |    |
+           | S2 |==========================| S1 |
+           |    | 0  | 1  | 2  | 3 | 4 | 5 |    |
+           +====================================+
+                         e   /\
+                      Player 1  ||
+*/
