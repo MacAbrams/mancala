@@ -300,8 +300,8 @@ function tournament(){
   text(num-(outcome[2]+outcome[3]),80+200*(prop1),290)
   
     noStroke()
-  prop1=(outcome[2]+outcome[0])/num/2
-  prop2=(outcome[1]+outcome[3])/num/2
+  prop1=(outcome[3]+outcome[0])/num/2
+  prop2=(outcome[1]+outcome[2])/num/2
   fill(255)
   rect(80,320,200,20)
   fill(255,0,0)
@@ -313,8 +313,8 @@ function tournament(){
   text("combined",150,310)
   text(p1.getName(),20,330)
   text(p2.getName(),290,330)
-  text(outcome[0]+outcome[2],80,360)
-  text(outcome[1]+outcome[3],260,360)
+  text(outcome[0]+outcome[3],80,360)
+  text(outcome[1]+outcome[2],260,360)
   text(2*num-(outcome[1]+outcome[2]+outcome[3]+outcome[0]),80+200*(prop1),360)
 
   fill(255)
