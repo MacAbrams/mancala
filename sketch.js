@@ -183,6 +183,9 @@ function selectPlayer1(){
   if(a==2){
     p1 = new Something_Else("will");
   }
+  if(a==3){
+    p1 = new MacBot("mac");
+  }
   b.setP1(p1);
 }
 function selectPlayer2(){
@@ -191,6 +194,9 @@ function selectPlayer2(){
   p2 = new Player("test2");
   if(a==2){
     p2 = new Something_Else("will");
+  }
+  if(a==3){
+    p2 = new MacBot("mac");
   }
   b.setP2(p2);
 
