@@ -52,7 +52,14 @@ class Board{
     if(this.turnNumber%2==0){
       let playing = true;
       while (playing){
-        playing = this.playMove(0,this.p1.getMove(this.spaces,this.s1,this.s2))
+        let tempSp = [...this.spaces];
+        let temps1 = this.s1
+        let temps2 = this.s2
+        let m = this.p1.getMove(tempSp,temps1,temps2)
+
+        playing = this.playMove(0,m)
+        // console.log(this.spaces,m )
+
       }
     }
     else{
@@ -62,13 +69,19 @@ class Board{
         for(let i=0;i<11;i++){
           reversed[i] = this.spaces[11-i]
         }
-        playing = this.playMove(1,11-this.p2.getMove(reversed,this.s2,this.s1))
+        let tempSp = [...reversed];
+        let temps1 = this.s1
+        let temps2 = this.s2
+        let m = 11-this.p2.getMove(reversed,temps2,temps1)
+        playing = this.playMove(1,m)
+        // console.log(this.spaces,m )
       }
     }
     this.turnNumber++;
     // this.draw()
   }
   playMove(turn,space){
+    // console.log(space)
     this.retries++;
     if(this.retries>1000){
       return false;
@@ -169,6 +182,12 @@ class Board{
       text(this.spaces[i],i*30+100,150)
 
     }
+    let c = 0;
+    for(let i=0;i<12;i++){
+      c +=this.spaces[i];
+    }
+    text(c,200,320)
+    text(c+this.s1+this.s2,200,340)
   }
 }
 
@@ -228,9 +247,11 @@ function buttonClick(){
     }
     b.playGame();
   }
-  else if(a==3 && !b.isOver()){
+  else if(a==3){
+    if(!b.isOver()){
     loop()
     b.playTurn();
+    }
   }
   else{
     noLoop()
@@ -241,7 +262,7 @@ function buttonClick(){
 function tournament(){
   let num = 10;
   let n = document.getElementById("tourSize").value;
-  console.log(n)
+  // console.log(n)
   if(n>0 && n<=1000){
     num = n;
   }
