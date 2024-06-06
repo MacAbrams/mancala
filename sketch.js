@@ -160,7 +160,12 @@ class Board{
     ellipse(70,125,25,100)
         fill(0)
 
-    text(this.s2,70,125)
+    if(String(this.s2).length==1){
+      text(this.s2,65,125)
+    }
+    else{
+      text(this.s2,62,125)
+    }
 
     for(let i=0;i<6;i++){
       fill(255)
@@ -205,6 +210,9 @@ function selectPlayer1(){
   if(a==3){
     p1 = new MacBot("mac");
   }
+  if(a==4){
+    p1 = new JackBot("jack");
+  }
   b.setP1(p1);
 }
 function selectPlayer2(){
@@ -216,6 +224,9 @@ function selectPlayer2(){
   }
   if(a==3){
     p2 = new MacBot("mac");
+  }
+  if(a==4){
+    p2 = new JackBot("jack");
   }
   b.setP2(p2);
 
@@ -267,7 +278,8 @@ function tournament(){
     num = n;
   }
   let outcome = [0,0,0,0]
-  
+      b.switch();
+
   for(let i=0;i<num;i++){
     b.reset()
     let o = b.playGame();
@@ -278,8 +290,8 @@ function tournament(){
       outcome[1]++;
     }
   }
-  
-  b.switch();
+             // console.log("switching")
+
   for(let i=0;i<num;i++){
     b.reset()
     let o = b.playGame();
