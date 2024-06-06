@@ -319,6 +319,8 @@ function tournament(){
       outcome[3]++;
     }
   }
+  console.log(outcome)
+  
   background(220)
   b.draw()
   // console.log(outcome)
