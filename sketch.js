@@ -161,31 +161,45 @@ class Board{
         fill(0)
 
     if(String(this.s2).length==1){
-      text(this.s2,65,125)
+      text(this.s2,66,129)
     }
     else{
-      text(this.s2,62,125)
+      text(this.s2,62,129)
     }
 
     for(let i=0;i<6;i++){
       fill(255)
       ellipse(i*30+100,100,25,45)
       fill(0)
-      text(this.spaces[11-i],i*30+100,100)
+      if(String(this.spaces[11-i]).length==1){
+        text(this.spaces[11-i],i*30+96,104)
+      }
+      else{
+        text(this.spaces[11-i],i*30+93,104)
+      }
     }
           fill(255)
 
     ellipse(280,125,25,100)
     fill(0)
-    text(this.s1,280,125)
+    if(String(this.s1).length==1){
+      text(this.s1,277,129)
+    }
+    else{
+      text(this.s1,273,129)
+    }
 
     for(let i=0;i<6;i++){
             fill(255)
 
       ellipse(i*30+100,150,25,45)
       fill(0)
-      text(this.spaces[i],i*30+100,150)
-
+      if(String(this.spaces[i]).length==1){
+        text(this.spaces[i],i*30+96,154)
+      }
+      else{
+        text(this.spaces[i],i*30+93,154)
+      }
     }
     let c = 0;
     for(let i=0;i<12;i++){
