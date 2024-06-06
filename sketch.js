@@ -294,7 +294,6 @@ function tournament(){
   let outcome = [0,0,0,0]
   console.log("initial p1:"+p1.getName()+"  p2:"+p2.getName())
 
-      b.switch();
 
   for(let i=0;i<num;i++){
     b.reset()
@@ -305,7 +304,9 @@ function tournament(){
     else if(o==p2.getName()){
       outcome[1]++;
     }
-  }       
+  }   
+  b.switch();
+
   console.log("second  p1:"+p1.getName()+"  p2:"+p2.getName())
 
   for(let i=0;i<num;i++){
